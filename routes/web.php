@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AchievementsController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layout');
 });
 
 Route::get('/users/{user}/achievements', [AchievementsController::class, 'index']);
+
+
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('post-login', [LoginController::class, 'postLogin'])->name('login.post'); 
+Route::get('registration', [LoginController::class, 'registration'])->name('register');
+Route::post('post-registration', [LoginController::class, 'postRegistration'])->name('register.post'); 
+Route::get('dashboard', [LoginController::class, 'dashboard']); 
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
