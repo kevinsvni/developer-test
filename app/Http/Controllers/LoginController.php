@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\User;
 use Hash;
+use DB;
 
 
 class LoginController extends Controller
@@ -45,9 +46,16 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+        $user = DB::table('users')->where('email','=',$request->email)->get()[0];
+
+        $completedLessons = DB::table('lesson_user')
+                    ->select('lesson_id')
+                    ->where('user_id', '=', $user->id)
+                    ->get();
+
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            Session::put('username', $request->email);
+            Session::put('user', ['useremail'=> $user->email, 'username'=> $user->name, 'id'=> $user->id, 'completedLessons'=>$completedLessons->pluck('lesson_id')->toArray()]);
             return redirect()->intended('dashboard')
                         ->withSuccess('You have Successfully loggedin');
         }

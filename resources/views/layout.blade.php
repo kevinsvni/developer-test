@@ -59,16 +59,10 @@
 
 <body>
 
-<?php
-        $userData = session()->all();
-        // dd($userData);
-        // exit;
-?>
-    
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">Course Portal</a>
+        <a class="navbar-brand" href="{{ url('dashboard') }}">Course Portal</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -84,7 +78,7 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" ><?php echo $userData['username']?></a>
+                        <p class="nav-link" >{{Session::get('user')['username']}}</p>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>
