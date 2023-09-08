@@ -11,7 +11,7 @@
                     <a href="{{ url('dashboard') }}" style="float: right">Go Back</a>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body text-center">
                     <table style="width:100%">
                     @foreach ($lessons as $lesson)
                         <tr>
@@ -20,7 +20,7 @@
                             @if(in_array($lesson->id, $completed))         
                             <a>Completed</a>        
                             @else
-                                <a href="{{ url('complete-lesson/'.$lesson->id) }}" >Complete lesson</a>      
+                                <a href="{{ url('complete-lesson/'.$lesson->id) }}" >Watch Video</a>      
                             @endif
                                 
                             </td>

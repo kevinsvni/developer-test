@@ -34,7 +34,7 @@ class LessonController extends Controller
                     ->select('lesson_id')
                     ->where('user_id', '=', Session::get('user')['id'])
                     ->get();
-        Session::put('user', ['useremail'=> $user['useremail'], 'username'=> $user['username'], 'id'=> $user['id'], 'completedLessons'=>$completed->pluck('lesson_id')->toArray()]);
+        Session::put('user', ['useremail'=> $user['useremail'], 'username'=> $user['username'], 'id'=> $user['id'], 'completedLessons'=>$completed->pluck('lesson_id')->toArray(), 'postedComments'=> $user['postedComments']]);
         return Redirect::back();           
     }
 }

@@ -53,9 +53,11 @@ class LoginController extends Controller
                     ->where('user_id', '=', $user->id)
                     ->get();
 
+        $postedComments = DB::table('comments')->where('user_id', '=', $user->id)->get()->toArray();
+        // print_r($postedComments);exit;
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            Session::put('user', ['useremail'=> $user->email, 'username'=> $user->name, 'id'=> $user->id, 'completedLessons'=>$completedLessons->pluck('lesson_id')->toArray()]);
+            Session::put('user', ['useremail'=> $user->email, 'username'=> $user->name, 'id'=> $user->id, 'completedLessons'=>$completedLessons->pluck('lesson_id')->toArray(), 'postedComments' => $postedComments]);
             return redirect()->intended('dashboard')
                         ->withSuccess('You have Successfully loggedin');
         }
