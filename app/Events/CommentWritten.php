@@ -17,7 +17,7 @@ class CommentWritten
      *
      * @return void
      */
-    public function __construct(Comment $comment)
+    public function __construct($comment)
     {
         $this->comment = $comment;
     }

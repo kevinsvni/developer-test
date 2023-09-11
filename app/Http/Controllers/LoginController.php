@@ -9,6 +9,7 @@ use Session;
 use App\Models\User;
 use Hash;
 use DB;
+use App\Events\CommentWritten;
 
 
 class LoginController extends Controller
@@ -58,6 +59,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             Session::put('user', ['useremail'=> $user->email, 'username'=> $user->name, 'id'=> $user->id, 'completedLessons'=>$completedLessons->pluck('lesson_id')->toArray(), 'postedComments' => $postedComments]);
+
             return redirect()->intended('dashboard')
                         ->withSuccess('You have Successfully loggedin');
         }

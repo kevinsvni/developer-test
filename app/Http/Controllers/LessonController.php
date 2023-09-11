@@ -18,6 +18,7 @@ class LessonController extends Controller
                 'lessons' => DB::select('select * from lessons'),
                 'completed' => Session::get('user')['completedLessons']
             ];
+
             return view("lessons")->with($data);
         }
 

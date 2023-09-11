@@ -32,15 +32,20 @@
                         <?php 
                         $comments = Session::get('user')['postedComments']; 
                         $user = Session::get('user');
+                        $isComment = count($comments);
                         ?>
-                        @foreach ($comments as $comment)
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    {{ $comment->body }}
-                                    <a class="small float-right">~ {{ $user['username'] }}</a>
+                        @if($isComment != 0)   
+                            @foreach ($comments as $comment)
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        {{ $comment->body }}
+                                        <a class="small float-right">~ {{ $user['username'] }}</a>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        @else
+                            You have not commented yet
+                        @endif
                     </div>
                 </div>
             </div>

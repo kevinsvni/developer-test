@@ -7,6 +7,7 @@
     <title>Course Portal</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
         @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
@@ -53,6 +54,14 @@
         {
             margin-left: 0;
             margin-right: 0;
+        }
+
+        .badge-custom{
+            background-color: #d7d7d7;
+            padding: 10px 50px;
+            font-size: 30px;
+            color: black;
+            font-weight: 700;
         }
     </style>
 </head>

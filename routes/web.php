@@ -21,7 +21,8 @@ Route::get('/', function () {
     return view('layout');
 });
 
-Route::get('/users/{user}/achievements', [AchievementsController::class, 'index']);
+Route::get('/users/{user}/achievements', [AchievementsController::class, 'index'])->name('achievements'); ;
+// Route::get('/users/achievements', [AchievementsController::class, 'index'])->name('achievements'); ;
 
 
 Route::get('login', [LoginController::class, 'index'])->name('login');
