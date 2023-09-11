@@ -17,7 +17,7 @@
 @endphp
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
 
             <div class="card m-2">
                 <div class="card-header"><h5 class="mb-1 text-center" style="font-family: Raleway, sans-serif;">D  A  S  H  B  O  A  R  D</h5></div>
@@ -51,11 +51,12 @@
             <div class="card m-2">
                 <div class="card-header"><h5 class="mb-1 text-center" style="font-family: Raleway, sans-serif;">A  C  H  I  E  V  E  M  E  N  T  S</h5></div>
                 <div class="card-body">
+                <?php print_r($upcomingAchievements); ?>
                     Lessons Watched Achievements:
                     <div class="row mt-3" style="justify-content: center;">
                         @if(count($unlockedLessonWatchedAchs)!=0)
                             @foreach($unlockedLessonWatchedAchs as $lessonWatched)
-                            <div class="col-4 col-lg-3">
+                            <div class="col-4 col-lg-2">
                                 <div class="text-center">
                                     <div class="d-flex align-items-center justify-content-center mb-3 mx-auto bsb-circle">
                                         <i class="fa fa-star badge-custom" aria-hidden="true"></i>
@@ -66,15 +67,18 @@
                             </div>
                             @endforeach
                         @endif
-                        <div class="col-4 col-lg-3">
-                            <div class="text-center">
-                                <div class="d-flex align-items-center justify-content-center mb-3 mx-auto bsb-circle">
-                                    <i class="fa fa-star-half-o badge-custom" aria-hidden="true"></i>
+                        @if($upcomingAchievements[0]!=null)
+                            <div class="col-4 col-lg-2">
+                                <div class="text-center">
+                                    <div class="d-flex align-items-center justify-content-center mb-3 mx-auto bsb-circle">
+                                        <i class="fa fa-star-half-o badge-custom" aria-hidden="true"></i>
+                                    </div>
+                                    <p class="display-6 fw-bold m-1">{{$upcomingAchievements[0]}}</p>
+                                    <p class="text-secondary">In Progress</p>
                                 </div>
-                                <p class="display-6 fw-bold m-1">{{$upcomingAchievements[0]}}</p>
-                                <p class="text-secondary">In Progress</p>
                             </div>
-                        </div>
+                        @endif
+                        
                     </div>
 
                     <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle">
@@ -82,7 +86,7 @@
                     <div class="row mt-3" style="justify-content: center;">
                         @if(count($unlockedCommentsWrittenAchs)!=0)
                             @foreach($unlockedCommentsWrittenAchs as $commentsWritten)
-                            <div class="col-4 col-lg-3">
+                            <div class="col-4 col-lg-2">
                                 <div class="text-center">
                                     <div class="d-flex align-items-center justify-content-center mb-3 mx-auto bsb-circle">
                                         <i class="fa fa-star badge-custom" aria-hidden="true"></i>
@@ -93,7 +97,8 @@
                             </div>
                             @endforeach
                         @endif
-                        <div class="col-4 col-lg-3">
+                        @if($upcomingAchievements[1]!=null)
+                        <div class="col-4 col-lg-2">
                             <div class="text-center">
                                 <div class="d-flex align-items-center justify-content-center mb-3 mx-auto bsb-circle">
                                     <i class="fa fa-star-half-o badge-custom" aria-hidden="true"></i>
@@ -102,6 +107,7 @@
                                 <p class="text-secondary">In Progress</p>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -109,10 +115,6 @@
             <div class="card m-2">
                 <div class="card-header"><h5 class="mb-1 text-center" style="font-family: Raleway, sans-serif;">B  A  D  G  E  S</h5></div>
                 <div class="card-body">
-                    <?php
-                    // print_r($data);
-                    ?>
-
                     <div class="row" style="justify-content: center;">
                         @if(count($unlockedBadgesAllEarned)!=0)
                             @foreach($unlockedBadgesAllEarned as $badge)
@@ -127,6 +129,7 @@
                             </div>
                             @endforeach
                         @endif
+                        @if($data->next_badge!=null)
                         <div class="col-4 col-lg-3">
                             <div class="text-center">
                                 <div class="d-flex align-items-center justify-content-center mb-3 mx-auto bsb-circle">
@@ -136,11 +139,11 @@
                                 <p class="text-secondary">In Progress</p>
                             </div>
                         </div>
+                        @endif
                     </div>
-
-
                 </div>
             </div>
+
         </div>
     </div>
 </div>

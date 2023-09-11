@@ -47,17 +47,18 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        $user = DB::table('users')->where('email','=',$request->email)->get()[0];
-
-        $completedLessons = DB::table('lesson_user')
-                    ->select('lesson_id')
-                    ->where('user_id', '=', $user->id)
-                    ->get();
-
-        $postedComments = DB::table('comments')->where('user_id', '=', $user->id)->get()->toArray();
-        // print_r($postedComments);exit;
+        
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            $user = DB::table('users')->where('email','=',$request->email)->first();
+
+            $completedLessons = DB::table('lesson_user')
+                        ->select('lesson_id')
+                        ->where('user_id', '=', $user->id)
+                        ->get();
+
+            $postedComments = DB::table('comments')->where('user_id', '=', $user->id)->get()->toArray();
+            // print_r($postedComments);exit;
             Session::put('user', ['useremail'=> $user->email, 'username'=> $user->name, 'id'=> $user->id, 'completedLessons'=>$completedLessons->pluck('lesson_id')->toArray(), 'postedComments' => $postedComments]);
 
             return redirect()->intended('dashboard')

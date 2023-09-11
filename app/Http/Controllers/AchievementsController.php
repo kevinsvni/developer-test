@@ -13,10 +13,6 @@ class AchievementsController extends Controller
 {
     public function index(User $user)
     {
-        // $userCommentAch = Session::all();
-        // $userLessonAch = Session::get('user_lesson_ach');
-        // print_r($userCommentAch);
-
         $commentWrittenAchievements = $this->getCommentWrittenAchievements($user);
         $lessonsWatchedAchievements = $this->getLessonsWatchedAchievements($user);
 
@@ -86,7 +82,7 @@ class AchievementsController extends Controller
     }
 
     function getLessonsWatchedAchievements($user){
-        $watchedLessons = DB::table('lesson_user')->select('lesson_id')->where('user_id', '=', Session::get('user')['id'])->get();
+        $watchedLessons = DB::table('lesson_user')->select('lesson_id')->where('user_id', '=', $user->id)->get();
         $noOfLessons = count($watchedLessons);
 
         if($noOfLessons >=1 && $noOfLessons < 5){
@@ -109,7 +105,7 @@ class AchievementsController extends Controller
             $upcoming_ach = '50 Lessons Watched';
             $count=4;
             $unlockedAchievements = ['First Lesson Watched','5 Lessons Watched','10 Lessons Watched','25 Lessons Watched'];
-        }elseif($noOfLessons >50){
+        }elseif($noOfLessons >=50){
             $current_ach = '50 Lessons Watched';
             $upcoming_ach = '';
             $count=5;
@@ -148,6 +144,7 @@ class AchievementsController extends Controller
         }elseif($total>=10){
             $current_badge = 'Master';
             $upcoming_badge = '';
+            $remaining=0;
             $unlockedBadges = ['Beginner','Intermediate','Advanced','Master'];
         }else{
             $current_badge = '';
